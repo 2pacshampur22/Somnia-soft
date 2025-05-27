@@ -1,0 +1,56 @@
+
+[network]
+rpc_url = "https://dream-rpc.somnia.network"
+chain_id = 123456789 # Пример ID цепочки Somnia
+explorer_url = "https://somnia-testnet.socialscan.io" # Опционально
+default_gas_limit = 300000 # Лимит газа по умолчанию для транзакций
+confirmations = 3 # Количество подтверждений для ожидания транзакции
+transaction_timeout = "2m" # Таймаут для ожидания транзакции (например, "120s" или "2m")
+
+[bot_settings]
+delay_range = ["5s", "15s"] # Диапазон задержки между операциями: [минимальная, максимальная]
+faucet_url = "https://faucet.somnia.network/api/claim"
+faucet_attempts = 5 # Количество попыток получения токенов с крана
+random_send_amount_stt = [0.001, 0.005] # Диапазон случайной отправки STT в десятичном формате
+min_balance_stt_for_action = 0.01 # Минимальный баланс STT для выполнения любых действий кошельком
+shuffle_wallets = true # Перемешивать ли кошельки перед использованием
+concurrent_tasks_per_wallet = 1 # Сколько одновременных задач может выполнять один кошелек (например, 1 - поочередно)
+global_concurrency_limit = 10 # Общий лимит одновременных задач (None для безлимита)
+use_proxies = true # Использовать ли прокси
+
+[wallet_management]
+wallets_file_path = "data/wallets.json"
+auto_save_interval_seconds = 300 # Интервал автосохранения кошельков в секундах (5 минут)
+update_balance_on_load = true # Обновлять ли балансы всех кошельков при загрузке
+enable_auto_activation = true # Автоматически ли активировать кошельки с достаточным балансом
+
+[contract_deployment]
+# Укажите пути к байткоду и ABI ваших контрактов
+# Например, если у вас скомпилированные контракты
+erc20_bytecode_path = "contracts/MyToken.bin"
+erc20_abi_path = "contracts/MyToken.abi"
+erc721_bytecode_path = "contracts/MyNFT.bin"
+erc721_abi_path = "contracts/MyNFT.abi"
+
+default_erc20_initial_supply = "1000000000000000000000000" # 1_000_000_000_000_000_000_000_000 WEI = 1,000,000 STT
+default_erc721_name = "MySomniaNFT"
+default_erc721_symbol = "MSNFT"
+default_erc721_base_uri = "ipfs://Qmb..." # Базовый URI для метаданных NFT
+
+[logging]
+level = "info" # debug, trace, info, warn, error
+enable_console_logging = true
+enable_file_logging = true
+log_file_path = "logs/somnia_bot.log"
+
+[[proxies]] # Массив таблиц для каждого прокси
+url = "192.168.1.1:8080"
+auth_user = "proxy_user_1"
+auth_pass = "proxy_pass_1"
+proxy_type = "http"
+
+[[proxies]]
+url = "10.0.0.1:9050"
+auth_user = "proxy_user_2"
+auth_pass = "proxy_pass_2"
+proxy_type = "socks5"
